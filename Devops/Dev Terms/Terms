@@ -1,0 +1,24 @@
+Terms:-
+
+        . always refers to current directory
+
+    Regression: New changes impacting working features and tests to identify this are called as Regression tests
+
+    API Testing:
+    Rest API:
+
+    unit testing: testing smaller units of code by writing code
+
+    Day build: Every change submitted by developer during active work hours
+            .We do minimal test executions
+            .This should finish quickly
+
+    Night build: This build is done to consolidate all the work done by your dev team for the whole day
+            .We do execute all the automated tests
+            .This might take hours and gives confidence to manual testing team so that they can consider this build
+
+Quality Gate: If we fail the build when code quality issues exist this is called as Quality Gate
+
+Artifact: Artifact is what build/package generates
+
+Repository: This is a storage location which maintains history

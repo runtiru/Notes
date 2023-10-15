@@ -1,0 +1,75 @@
+
+Scripted pipeline
+
+node('JDK_8') {
+    stage('git') {
+        git branch: 'master' , url: git 'https://github.com/wakaleo/game-of-life.git'
+    }
+    stage('build') {
+        sh 'mvn package'
+    }
+    stage('reporting') {
+        archiveArtifacts artifacts: '**/gameoflife.war', followSymlinks: false
+        junit '**/surefire-reports/TEST-*.xml'
+    }
+}
+
+----------------
+----------------
+
+
+Declartive pipeline
+
+pipeline {
+    agent { label 'JDK-17' }
+    stages {
+        stage('git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/dummyrepos/spring-petclinic-1.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+
+}
+
+-----------------------
+-----------------------
+
+* Declartive pipeline
+
+pipeline {
+    agent { label 'runner' }
+    options {
+        timeout(time: 30, unit: 'MINUTES')
+    }
+    triggers {
+        pollSCM('* * * * *')
+    }
+    tools {
+        jdk 'JDK_17'
+    }
+    stages {
+        stage('vcs') {
+            steps {
+                git url: 'https://github.com/runtiru/spring-petclinic1.git', 
+                    branch: 'develop'
+            }
+        }
+        stage('build and package') {
+            steps {
+                sh script: 'mvn package'
+            }
+        }
+        stage('reporting') {
+            steps {
+                archiveArtifacts artifacts : '**/target/spring-petclinic-*.jar'
+                junit testResults : '**/target/surefire-reports/TEST-*.xml'
+            }
+        }
+    }
+}

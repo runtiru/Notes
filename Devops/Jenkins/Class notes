@@ -1,0 +1,41 @@
+# 21/07/23
+Upstreem and Downstreem projects
+   * the project A triggers the Project B then
+   * Project B is downstream of Project A
+   * Project A is upstream of Project B 
+
+        * For day builds
+                * dotnet build  -c "Debug" <path of project or sln>
+        * For night builds
+                * dotnet build  -c "Release" <path of project or sln> 
+
+*  -c :- configuration
+*  Debug:- it is an a additional information which will help to developers to figurout issue 
+*  Release:- 
+
+# 27/07/23
+
+### Infrastructure as a code (IaC)
+
+
+### Infra Provisioning
+
+
+### Terraform
+        this is infra provisinoning tool and supports infrastructure as code, terraform uses Aashicorp configuration language.
+
+### Ways of working with terraform
+
+### Terraform Installation
+ 
+
+ 28/07/23
+ ---------
+ ### CREATE A S3 BUCKET
+
+ ^ terraform -help
+ ^ terraform inti
+ ^ terraform apply 
+    ![Alt text](Capture.PNG)
+
+        
