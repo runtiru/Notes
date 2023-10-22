@@ -1,0 +1,34 @@
+---
+messages:
+   happy_birthday "mama":
+    - 'Happy Birthday to you!'
+    - 'Many returns of the day!'
+    - 'Wishing you a wonderful celebration!'
+my wishes:
+  - Happy birthday to you "mama"
+  - I hope you have a wonderful day filled with joy, laughter, and cake.
+  - You deserve all the happiness in the world.
+  - Wishing you a very happy birthday!
+greetings:
+  - language: English
+    message: Happy Birthday!
+  - language: Telugu
+    message: జన్మదిన శుభాకాంక్షలు!
+  - language: Hindi
+    message: जन्मदिन की शुभकामनाएं!
+  - language: Malayalam
+    message: ജന്മദിനാശംസകൾ!
+  - language: Tamil
+    message: பிறந்தநாள் வாழ்த்துக்கள்!
+  - language: Kannada
+    message: ಹುಟ್ಟುಹಬ್ಬದ ಶುಭಾಶೀರ್ವಾದಗಳು!
+  - language: French
+    message: Joyeux anniversaire !
+  - language: German
+    message: Alles Gute zum Geburtstag !
+  - language: Spanish
+    message: ¡Feliz cumpleaños !
+  - language: Portuguese
+    message: Feliz aniversário !
+  - language: Japanese
+    message: お誕生日おめでとうございます !
