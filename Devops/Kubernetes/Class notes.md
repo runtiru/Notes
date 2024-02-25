@@ -14,21 +14,25 @@
 ------------
 ### K8s-Installaton 
 -------------------
-[Kubernetes +CRI+ dOCKER]
-- Kunernetes has stoped suport to Docker directly
-    we need to install CRI component
+[Kubernetes + CRI + DOCKER]
+- Kunernetes has dose not suport to Docker directly
+  we need to install CRI (Container Runtime Interface) Component...
 
 * Instal those commands in `Master node` and `worker node`
-  1. kubeadm 
-    - install container runtime
+  1. kubeadm (A tool used to build k8s clusters)
+    - install container runtime (CRI)
 [Docker Engine does not implement CRI which is a requirement for a container runtime to work with Kubernetes]
 [https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/]
    - Required ports
 [https://kubernetes.io/docs/reference/networking/ports-and-protocols/]
    
   2. kubectl
+    - Kubernetes-specific command line tool that lets you communicate and control Kubernetes clusters.
+
   3. kubelet
+    - The primary "node agent" that runs on each node.
 ---xx---
+
 # Installation steps
     - Each matchine have atleast 2vcpus and 4GB RAM
 
@@ -37,8 +41,9 @@
   [docker,cri-dockerd,kubeadm,kubectl,kubelet]
     ^ install docker (docer script install)
     ^ sudo usermod -aG docker ubuntu
-    ^ exit & relogin
-* install CRI-dockerd
+    ^ exit & 
+
+# Install CRI-dockerd
     [https://github.com/Mirantis/cri-dockerd]
     - goto :Using cri-dockerd --> instal --> releases page. 
         Assets --> [https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb]
@@ -92,6 +97,7 @@ check the nodes
     [STATUS : NotReady -- Pod Network is not ready]
 ---xx---
 ---xx---
+
  # 2. Node-1
     install those softwares
   [docker,cri-dockerd,kubeadm,kubectl,kubelet]
@@ -774,7 +780,7 @@ spec:
 ## 10/09/23 [Even]
 ------------------
 ### Servives
-[[https://directdevops.blog/2023/09/10/devops-classroomnotes-10-sep-2023-3/]
+[https://directdevops.blog/2023/09/10/devops-classroomnotes-10-sep-2023-3/]
 * Create service and 3 nginx pods (yesterday done)
     ^ kubectl apply -f nginx-rs.yaml
     ^ kubectl get po -o wide
@@ -1664,16 +1670,6 @@ spec:
     02:39:00
 
 
-
-
-
-
-
-
-
-
-
-
 ==================================================================
 # 24/09/23
 ----------
@@ -1702,8 +1698,6 @@ Software composition analysis - sonarqube
 x-ray - jforg
 
 * vulnerability management
-
-
 
 
  

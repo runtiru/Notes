@@ -19,7 +19,8 @@
 1. Jenkins_master
     ^ sudo apt update
     ^ sudo apt install openjdk-17-jdk -y
-    ^ vi installjenkins.sh            (nots qtdevops-19th class)
+    ^ vi installjenkins.sh   (nots qtdevops-19th class)
+```bash
 #!/bin/bash
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -28,6 +29,7 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 sudo apt-get update
 sudo apt-get install jenkins -y
+```
 (:wq!)
     ^ chmod +x installjenkins.sh
     ^ ./installjenkins.sh
@@ -98,7 +100,9 @@ Manage jenkins
         CREDENTIALS -  
     ADD ^jenkins^
             DOMAIN - Global credentials
-            KIND - SSH Username eith private key
+            KIND - SSH Username eith 
+            
+            private key
                 SCOPE - Global(jenkins,nodes,item,all child items.etc)
                 ID - UBUNTU_ID_RSA                    
                 DESCRIPTION - this is my key for ubuntu
@@ -820,7 +824,7 @@ Create a file - temp/Jenkins/
 
 activate node-1 (name - runner)
 activate jenkins_master node
-
+```bash
 pipeline {
     agent { any, none, label, node, docker }
     environment { - }
@@ -842,6 +846,7 @@ pipeline {
         }}
 
 }
+```
 * Pipeline Steps Reference - search what need you want for project..
     1. git
         Git plugin - git: Git
@@ -880,6 +885,8 @@ pipeline {
         }
 -------------------------
 ## We have developed the basic skeleton
+
+```bash
 pipeline {
     agent { label 'JDK-17' }
     options {
@@ -910,6 +917,7 @@ pipeline {
     }
 
 }
+```
 -----------------
 
         ^ git add .
@@ -955,7 +963,7 @@ in terminal
     ^ code .   ------> (vsc)
 
 in vsc - create a file "jenkinsfile"
-
+```bash
     pipeline {
         agent { label (JDK_8) }
         environment { - }
@@ -989,6 +997,7 @@ in vsc - create a file "jenkinsfile"
         }
     }
 }
+```
 
     ^ git status
     ^ git add .

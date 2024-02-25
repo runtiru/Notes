@@ -1,0 +1,47 @@
+---
+- student:
+    name: mani
+    marks:
+      - subject: Math
+        score: 100
+      - subject: Science
+        score: 100
+      - subject: English
+        score: 100
+      - subject: History
+        score: 100
+      - subject: Geography
+        score: 100
+      - subject: Art
+        score: 100
+
+---
+- students:
+  - name: Mani
+    subjects:
+      - math: 100
+      - science: 100
+      - english: 100
+      - history: 100
+      - geography: 100
+      - social_studies: 100
+  - name: Rajesh
+    subjects:
+      - math: 100
+      - science: 100
+      - english: 100
+      - history: 100
+      - geography: 100
+      - social_studies: 100
+  - name: Swapna
+    subjects:
+      - math: 100
+      - science: 100
+      - english: 100
+      - history: 100
+      - geography: 100
+      - social_studies: 100
+
+
+
+

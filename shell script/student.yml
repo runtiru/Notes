@@ -1,0 +1,15 @@
+---
+students:
+  - name: Ram
+    subjects:
+      - Match: '99'
+      - phy: '100'
+      - science: '99'
+    status: pass
+  - name: Run
+    subjects: 
+      - Match: '90'
+      - Phy: '89'
+      - Science: '99'
+    status: pass
+

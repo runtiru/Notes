@@ -1,0 +1,302 @@
+sudo visudo 
+run one command what you nees in vi
+(user2 )
+
+which adduser
+passwd
+su - user3
+passwoed
+-------------
+sudo usermod (group name)
+sudo user od -aG user
+----------
+
+sudo touch file1
+ls -la
+(check the file permitions)
+
+- mens normal fiel
+rw- user permission
+r-- group permission
+r-- other user permission 
+
+D : dierctory
+l : link file
+b : block file 
+
+### by default files we get the 644
+r : read 4
+w : write 2
+x : exucute 1
+------------------
+
+### find command
+(find command used for finnd files and dirrectory in machine)
+
+find . -name test
+
+find -tupe f name test
+find -type f
+
+find . -perm 766
+fine .-perm 755
+find . -perm 644
+
+find -type f -name test -exec rm {} +
+
+------------
+### Exc
+
+sudo groupadd user3
+sudo usermod -aG user3 user2
+sudo which cp       
+(/usr/bin/cp) (copy the path)
+sudo visudo
+    (add permisstons) 
+con+o and con+x
+--------
+
+### Ex1
+1:- sudo adduser tiru1
+2:- sudo visudo
+     add permisions for nopasswd
+3:- which cp (copy home dier)
+    add permission for cp
+
+sudo -i
+    (change to root user)
+exit 
+    ubuntu user
+
+### Ex2
+sudo addgroup ram
+sudo usermod -aG ram tiru1
+        (groupname username)
+
+### Ex3       
+sudo touch 1.txt (create a file)
+sudo mkdir jai (create a folder)
+
+ls -la
+    (list of files and folders)
+Assin permitions :-
+    sudo chmod 655 1.txt
+    ls -la
+    sudo chmod 666 jai
+    ls -la
+
+which cp
+sudo visudo
+
+### Ex5
+sudo touch honor
+sudo mkdir lenovo
+sudo chmod 655 honor
+ls -la
+sudo chmod 766 lenovo
+ls -la
+
+### ex6:-
+1:- sudo find /home/ubuntu -perm 655 -type f -exec chmod 777 {} +
+
+2:- sudo chmod -rwx honor
+---------------
+
+### 29/07/23 -Class 06
+-----------------------
+# Package management in linux
+    .deb
+    .rpm
+
+ubuntu - apt as package maneger 
+redhat - yum as packeage , rpm 
+centos - 
+
+* practice 
+    create ec2 machine (ubuntu)
+        
+    ^ sudo apt update (or) sudo apt-get update
+    ^ sudo apt install nginx
+    ^ sudo apt install git
+    ^ git --version
+    
+    ^ sudo systemctl status nginx
+    ^ sudo systemctl disable nginx
+    ^ 
+    ^ sudo systemctl enable nginx
+
+    ^ sudo apt --help
+    ^ sudo apt list
+    ^ sudo apt show nginx
+    ^ sudo apt remove git
+    ^ sudo apt install git
+    ^ sudo git -version
+    ^ sudo apt install zip -y
+    ^ sudo service nginx start (place of the pakage)
+
+## redhat
+    ^ sudo yum install git
+    ^ sudo yum update
+    ^ sudo yum install httpd
+    ^ sudo systemctl status httpd
+    ^ sudo systemctl start httpd
+    ^ sudo systemctl status httpd
+    ^ sudo systemctl disable
+    ^ sudo systemctl enable 
+
+    ^ sudo yum info httpd
+
+istalled package
+    ^ sudo yum installed | grep httpd
+
+search some package
+    ^ sudo yum package .....
+
+ubuntu instant
+---------------
+    ^ sudo apt update
+    ^ sudo apt-cache search maven
+install jdk-18
+    ^ sudo apt install openjdk-18 -y
+    ^ 
+## ACTIVITY:-
+    1. Install maven pakage
+            ^ sudo apt install maven
+            ^ mvn -v
+     after downlode mavn
+        ^ sudo wget (paste IP)
+        ^ sudo tar +x (your package)
+
+    creater a 1-directirys
+        ^ sudo mkdir demo
+        ^ cd demo
+    create 2- files
+        ^ touch file1 fiel 2
+        ^ LS
+        ^ sudo tar -cvf file.tar file1 file2
+        ^ ls
+        ^ sudo makdir test
+        ^ sudo cd file.tar test
+        ^ cd test/
+        ^ ls
+        ^ suso tar -xf file.tar
+        ^ ls
+        ^ ls -la
+        ^ sudo tar -cvzf file.tar.gzip file1 file2
+        la -la
+
+* untar the files
+    ^ sudo tar -xvf file1.tar.gzip
+    ^ sduo zip test.zip file1 file2
+    
+    
+## ACTIVITY 2:-  
+    * download maven
+
+## ACTIVITY 3:-
+    1. create two linux machine
+    2. if you are using aws machine change password authentication as yes and restart ssh service
+    3.create user in two machines
+    * 
+    ^ 
+
+------------
+### netstat - oprts
+
+    ^ sduo apt install net-tools
+
+    ^ sudo netstat --help
+        * -t : tcp
+        * -u : udp
+    ^ sudo netstat -tunlp |grep 80
+    ^ sudo netstat -tunlp |grep nginx
+--------
+    ^ sudo ap tinstall apache2
+    ^ sudo systemctl status apache2
+ (hear both nginx and apache2 is same port - 80)
+
+    ^ sudo netstat -tulnp |grep 80
+-----------------
+sever1                          sever2
+^ sudo ssh ubuntu@id
+^ sudo vi /etc/ssh/sshd_config
+^ sudo systemctl restart ssh
+^ sudo adduser user1
+^ sudo cat /etc/passwd
+^ 
+^ ssh user@(second user IP)
+-------------------------
+
+^ scp -r test user@2ndIP
+^ scp -r test user@2ndIP:/home/
+
+
+----
+## new batch 
+## 13/08/23
+----
+* linux has two types of groups
+    1. primary
+    2. secondry
+
+    ^ groupadd projectA
+    ^ cat /ect/group
+
+## Package management in linux
+
+    two types
+        .deb  --- debuan familiy
+        .rpm    ---readhat
+
+    apt , dpkg (ubuntu)
+    yam , rpm (redhat)
+
+# install nginx package
+
+    ^ sudo apt update
+    ^ sudo apt install nginx -y
+    ^ apt list --installed
+    ^ grep nginx (for know the install or not)
+
+* nginx is a demon (the service running on background)
+
+    ^ systemctl status nginx (for know the status)
+    ^ systemctl disable nginx (for desable the nginx) 
+    ^ systemctl eneble nginx
+
+* specific version installation
+    ^ apt-cache madison nginx
+    ^ apt install nginx <what package you need>
+
+------
+
+    ^ sudo -i
+    ^ sudo apt update
+    ^ sudo apt install <package>
+    ^ man apt (what are the services)
+    ^ apt upgrade (upgrade all the package)
+    ^ apt remoce <package name> 
+    ^ apt remove <package name>
+
+if want to remove package and 
+    ^ apt autoremove nginx
+
+-------
+# install git
+    ^ apt install git
+    ^ apt show git
+
+# isntall jdk
+    ^ sudo apt install openjdk-17-jdk -y
+
+--->
+* Activity-1
+
+    1. install openjdk-18
+    2. install nginc with specific version 
+
+* Activity-2
+    1. create group as project
+    2. create user jenkins and demo
+    3. add the jenkins and demo user into project group
+---->

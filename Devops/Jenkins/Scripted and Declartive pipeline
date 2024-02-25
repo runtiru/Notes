@@ -1,6 +1,5 @@
-
 Scripted pipeline
-
+```bash
 node('JDK_8') {
     stage('git') {
         git branch: 'master' , url: git 'https://github.com/wakaleo/game-of-life.git'
@@ -13,13 +12,11 @@ node('JDK_8') {
         junit '**/surefire-reports/TEST-*.xml'
     }
 }
-
+```
 ----------------
 ----------------
-
-
 Declartive pipeline
-
+```bash
 pipeline {
     agent { label 'JDK-17' }
     stages {
@@ -36,12 +33,11 @@ pipeline {
     }
 
 }
-
+```
 -----------------------
 -----------------------
-
 * Declartive pipeline
-
+```bash
 pipeline {
     agent { label 'runner' }
     options {
@@ -73,3 +69,4 @@ pipeline {
         }
     }
 }
+```

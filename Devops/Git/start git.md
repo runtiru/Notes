@@ -118,10 +118,3 @@ day3
     git add .
     git commit -m "Added folder structure"
     git log --oneline
-    
-
-
-
-
-
-

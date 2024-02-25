@@ -1,0 +1,138 @@
+-----------------
+## 29/07/23
+-----------------
+### Branching stratagy:-
+Git 
+    Branchs    
+     
+            marge       pullrequst              release  hotfix
+        Featuer branch/----------Devlop branch------------|--------------|---------Master branch  
+        task branch               (indivivual)            |              |       (costmor change)
+                                        |                 |              |            |
+                                        |                 |              |            |
+                                        |                 |              |            |
+                                        |                 |           hotfix          tag
+----------
+gitjub.com
+    create a new pepo (https IP)
+        create own fork - copy
+
+
+    jenkins
+create a free style project 
+        master
+            java install
+            dotnet 7
+        nopcommers
+
+# Branching Strategy
+
+* Git Flow:-
+    * The main idea behind the Git flow branching strategy is to "isolate your work into different types of branches".
+    * There are five different branch types in total:
+
+    Git have Branches 
+        Master (or) Main
+        Develop
+        Feature
+        Release
+        Hotfix
+
+* The two primary branches - main and develop.
+* There are three types of supporting branches: feature, release, and hotfix.
+
+    1. Master Branch (version 1.0, 2.0 like)
+            - any change on the masterbranch means that giving relese your coustmer (or) clint )
+            - no developer will directly can submit the changes on masterbranch
+            - masterbranch is rouldout
+        - its create
+          develop branch
+            - any commit that are develop in develop
+            branch represent that is done on developer
+            - 
+
+    2. Develop Branch  
+            - its represent by individual developers
+            - developers dont directly work on master branch
+            - only do marge changes
+        - its create
+           feature/task branch (its not a part of git, its developer local laptops)
+            - push the changes into feature branch
+            - fast forword to frature branch
+            
+    3. Feature Branch/ Task Branch (Developers)
+            - developr make the commits hear
+    'developers changes the whant clint required'
+            - once done the changes developer will 'marge' to develop branch
+
+--------------> (Day Build)
+    
+    4. Release Branch
+            - what ever changes done the develop branch to 'marge' to release branch
+            - no one is working on relese branch
+
+    - configure (Night Build)
+
+        - you do build the code
+        - you do static code analysis
+        - you send to the package repo
+    ance every thing done 
+        - done test environment 
+        - finally run automatiic test
+
+    * once done all the changes we would relese the changes to coustmer
+
+    5. Hotfix (iemedate fixes)
+            - emergency changes 
+            - fix the issues to release to master branch
+    (3ways marge or cherry pic)
+
+* refer to:- https://coderefinery.github.io/git-intro/basics/  
+
+### Git lab branching strategies:-----RT(18:25)
+
+- your branch represtnt your environment
+
+    *. Master 
+        - Deployed on staging (staging environment)
+        - deploy to pre-production
+        - 
+    *. Pre-Production
+        - deploy to production
+        - 
+    *. Production
+
+## Pull-requsts -----RT(25:00)
+---------------
+    - it is a future of git repository
+    
+GitHub.com
+    (Install)
+
+    - create a fork
+*  add file (create new file)
+    name - main.py
+             (def main():
+                pass)
+    commit changes
+        comit message - create main.py as this is required
+    -ok-
+
+this branch is 1 commit ahead of ...........
+
+
+goto pull requst
+    new pull requst
+        base repo
+            creat the pull requst
+
+
+
+
+
+
+
+
+
+
+

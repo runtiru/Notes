@@ -514,9 +514,7 @@ copy the port ID and open in web page
     clone the nopCommerce url `https://github.com/nopSolutions/nopCommerce`
     
 vi Dockerfile
-```
-
-
+```bash
 FROM mcr.microsoft.com/dotnet/sdk:7.0
 LABEL author="tiru" organization="qt"
 WORKDIR /Ram
@@ -532,6 +530,8 @@ CMD ["dotnet","Nop.Web.dll","--urls","http://0.0.0.0:5000"]
 4. COPY (after unzip {nopcommercegithub --> releases --> nopCommerce_4.60.4_NoSource_linux_x64.zip (copy the zip file - APC ^ wget <zipfile>)} the nopCommerce file we have and git file name </Ram>)
 
 5. RUN apt update && install && mkdir bin logs && unzip 
+```
+
    
 ======================================================================
 ## 31/08/23 [Mrng]
@@ -728,6 +728,7 @@ refer to docker file
     - Exec is a family of system calls (e.g., execv, execl, execve, etc.) 
     - used to replace the current process's memory image with a new program. 
 `---xx---`
+
 * Shell form:
     - The command as a single string, which is interpreted by a shell (typically /bin/sh) within the container.
     - Commands are written without [] brackets and are run by the container's shell, such as /bin/sh -c

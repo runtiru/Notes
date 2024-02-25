@@ -67,7 +67,7 @@ Get nopCommerce
 
 copy aws instance id - 
         web - paste id with :5000
-
+======
 -------
 * create one ec2 instance (t2.medium - 20.04)
   web: nopcommers install on linux
@@ -266,7 +266,7 @@ spc 1.0
 * Build again
   ^ docker image build -t spc:1.1 .   --> (. is needed)
   
-  ^ docker container run -d --name spc -P spc:1.0 
+  ^ docker container run -d --name spc -P spc:1.0 2
   ^ docker container ls
 now copy the instance id and paste the new web
 ex: [35.160.24.177:32768]
