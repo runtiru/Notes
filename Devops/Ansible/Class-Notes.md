@@ -1,83 +1,58 @@
 # 04/10/23
-----------
+
 ## User Creation
-* ssh (scure Shell):- 
-    - is a network protocol used for secure remote access to computer systems over a potentially unsecured network.
+
+* ssh (scure Shell):-
+  * is a network protocol used for secure remote access to computer systems over a potentially unsecured network.
 
 * Linux:-
-    - linux is a kernel 
+  * linux is a kernel
 
 * Kernel:-
-    - core oprating system which capability speake whith hardware giveing simple interphase
+  * core oprating system which capability speake whith hardware giveing simple interphase
 
 * Distubuations
 * Shell
 
-Debian Family
-    - Ubuntu
-    - Kali
-    - Debian
+* Debian Family     * Redhat Family
+    - Ubuntu          - Redhat
+    - Kali            - Fedora
+    - Debian          - Centos
+                      - RHEL
+                      - Amazon Linux
+==================================================================
 
-Redhat Family
-    - Redhat
-    - Fedora
-    - Centos
-    - RHEL
-    - Amazon Linux
-
-* username
- 
-* public key
-* public IPv4 address
-
-* private key
-* private IPv4 address
-
-* RSA
-* .pem
-* ssh servier
-* ssh clint
-
-* sftp (SSH file tranfer protocal)
-Changing file permissions
-* chmod 400
-
-* sftp
-* vi
-* systemctl
-adduser
-    
-================================================================== 
 ## 05/10/23
------------
+
 [https://directdevops.blog/2023/10/05/devops-classroomnotes-05-oct-2023/]
-## Create a user and
-## Setting up password less authentication between linux machines:-
+
+## Create a user and Setting up password less authentication between linux machines:-
 
 * Create 2 instances
     server-1 and server-2
-    login that matchane 
-    ^ ssh -i ~/downloads`tab`\<key.pem> ubuntu@<IP>   --->2
+    login that matchane
+    ^ ssh -i ~/downloads`tab`\<key.pem> ubuntu@<IP>   --->Both
 
-  - passwd authuntication yes
-    ^ sudo vi(nano) /etc/ssh/sshd_config  ---2
+  * passwd authuntication yes
+    ^ sudo vi(nano) /etc/ssh/sshd_config  ---Both users
   PasswordAuthentication `yes`
    `Esc:wq!`
 
-  - restaer the server
-  ^ sudo systermctl restart sshd    ---2
+  * restaer the server
+  ^ sudo systermctl restart sshd  ---Both users
 
-  - create user 
-  ^ sudo adduser devops ----2
+  * create user
+  ^ sudo adduser devops ----Both users
   Password:<runner>
 
-  - communicate with 2 servers
+  * communicate with 2 servers
   ^ ssh devops@<private ip of server2>  ---(1)
     Password: *****
   ^ exit
 
 # Adding user to sudo    ------>RT (14:00)
-  - Adding user to sudo     ----2
+
+* Adding user to sudo     ----Both users
   ^ sudo visudo
   In %sudo-->
   devops ALL=(ALL:ALL) NOPASSWD:ALL
@@ -85,33 +60,30 @@ adduser
         enter
           ctrl+x -->
 
-  - switch user     ---2 
+* switch user     ---Both users
   ^ su devops
   passwd ****
   
-  - home directory      ---2
+* home directory      ---Both users
     ^ cd ~
     ^ pwd
     /home/devops
 
-    ^ sudo apt update   ---2
-
-<!--
+    ^ sudo apt update   ---Both users
     * login form one server to another server   ----->RT (21:00)
       ^ ssh <private ip server2>  ---(1)  
-   <!-- Password: *****
-    ^ eixt  
-    -->
- 
-# setting password less authountication in server1 and 2   
+        Password: *****
+        eixt
+
+# setting password less authountication in server1 and 2
 
 * create key pair in sercer1    ---(1)
-    ^ ssh-keygen 
-  - check the both keys
+    ^ ssh-keygen
+* check the both keys
     ^ ls ~/.ssh/
-  id_rsa   id_rsa.pub   known_hosta   
-  <!-- - ~/.ssh/id_rsa   ==> private key
-       - ~/.ssh/id_rsa.pub ==> public key -->
+  id_rsa   id_rsa.pub   known_hosta
+    - ~/.ssh/id_rsa   ==> private key
+    - ~/.ssh/id_rsa.pub ==> public key
 
 `private key`
   ^ ls ~/.ssh/id_rsa
@@ -131,7 +103,7 @@ adduser
 In server2
     ^ ls ~/.ssh/
   authorized_keys = (private of server1)
-    ^ cat ~/.ssh/authorized_keys 
+    ^ cat ~/.ssh/authorized_keys
 ---xx---
 * After the ssh-copy-id is success, then we can login directly by using ip address as both machines have same username and password less authentication is setup.
 * switch to one server to another server
@@ -142,12 +114,11 @@ In server2
     ^ exit 
     -->
 
-----------------------------------------
-
 ## Ansible setup:-
-   - we have two machines with common user devops
-   - sudo permissions and password less authentication setup between server 1 and server 2
-   - From now server 1 will be called as `Ansible Control node`
+
+* we have two machines with common user devops
+* sudo permissions and password less authentication setup between server 1 and server 2
+* From now server 1 will be called as `Ansible Control node`
 and server 2 as `node 1`
 
 * Ensure python:3 is installed
@@ -158,25 +129,31 @@ and server 2 as `node 1`
 [https://docs.ansible.com/ansible/latest/installation_guide/index.html]
 
 # Install ansible      -----RT (35:00)
+
 [https://docs.ansible.com/ansible/latest/installation_guide/index.html]
+
 * We have two approaches to install ansible
-    Debian --> apt 
+    Debian --> apt
     RedHet --> yam (dnf)
 
 Debian:-
-   - apply those commands on server1 -----(1)
+
+* apply those commands on server1 -----(1)
+
 ```bash
 sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible -y
 ```
+
     ^ ansible --version
   ansible [core 2.15.4]
 
 ## Test ansible connectivity from ansible `control node` to `node1`
+
 * Create a file with node 1 ip address in it
-  - Create a file 
+  * Create a file
     ^ echo <Ip address-2> > hosts
     ^ cat hosts
   172.31.17.52
@@ -184,13 +161,14 @@ sudo apt install ansible -y
 * execute the following command `ansible -m ping -i hosts all`
     ^ ansible -m ping -i hosts all
 <---SUCCESS--->
+
 -----------------------------------------------------
 
 * Changing the host     ---->RT (46:00)
     ^ vi hosts    ----(1)
         172.31.17.52
         (localhost)
-        
+
     ^ ansible -m ping -i hosts all
 Its dosent move `-X-`
 
@@ -207,18 +185,22 @@ Its dosent move `-X-`
 <---SUCCESS--->
 
 * Ansible can communicte other machine useing two ways:-
-    - key based authountication
-    - password based authountication
+  * key based authountication
+  * password based authountication
 
 ====================================================================
+
 ## 06/10/23
+
 ### YAML
+
 [https://directdevops.blog/2023/10/06/devops-classroomnotes-06-oct-2023/]
-  -  This is data representation language which uses name values
+
+* This is data representation language which uses name values
         <name>: <value>
 
-  - YAML is inspired from python, so indentation’s become mandatory
-  - YAML files generally have `.yaml` or `.yml` as extensions
+* YAML is inspired from python, so indentation’s become mandatory
+* YAML files generally have `.yaml` or `.yml` as extensions
 
 Lets categorize data
     Scalar/Simple
@@ -265,6 +247,7 @@ Work experience:
 ```
 
 # Basic structure of Ansible playbook
+
 ```bash
 ---
 - name: <name of playbook - text>
@@ -276,39 +259,51 @@ Work experience:
       name: httpd # module arguments
       state: latest # state
 ```
+
 =====================================================================
+
 ## 07/10/23
+
 # Ways of Working in Ansible
+
     - Figure out the manual steps
     - Execute and verify if they are working
     - for each manual step findout an ansible module which can help.
-    
+
 # Ansible Module
-  - this is the smallest unit of work in Ansible
-  - Module takes some inputs which are generally referred as parameters and it has state.
+
+* this is the smallest unit of work in Ansible
+* Module takes some inputs which are generally referred as parameters and it has state.
 
 # Ansible Execution Approaches:-
-  * Adhoc command:
-      - This uses the following structure and it is used for `non repetitive tasks`
+
+* Adhoc command:
+  * This uses the following structure and it is used for `non repetitive tasks`
+
 ```bash
 ansible -m "<module-name>" -a "<arguments>" <where>
 ```
-  * Playbook: 
-      - This is yaml representation of sequence of commands and it is designed to be reptitive.
+
+* Playbook:
+  * This is yaml representation of sequence of commands and it is designed to be reptitive.
 
 # Activity: install apache server on node 1
+
     it any application deploy to do manual steps  if the application can work or not...
+
 * manual steps
+
 ```bash
 sudo apt update
 sudo apt install apache2 -y
 ```
 
 * Activity1:
-    - Write a yaml file
+  * Write a yaml file
           create 2 files `activity1.yaml`
                           `hosts`
-`activity1.yaml`                          
+`activity1.yaml`
+
 ```bash
 ---
 - name: run apache
@@ -322,60 +317,72 @@ sudo apt install apache2 -y
         state: prestnt
         update_cache: yes         
 ```
+
 hosts
+
 ```s
 <private ip address of node2 >
 ```
+
 * Syntax check
+
 ```bash
 ansible-playbook --syntax-check -i <path to inventory> <path to playbook.yaml>
 ansible-playbook --syntax-check -i hosts activity1.yaml
 ```
 
-*  Check the execution (dry run). Note this is not always correct
+* Check the execution (dry run). Note this is not always correct
+
 ```bash
 ansible-playbook --check -i <path to inventory> <path to playbook.yaml>
 ansible-playbook --check -i hosts activity1.yaml
 ```
 
 * Now lets execute the playbook
+
 ```bash
 ansible-playbook -i <path to inventory> <path to playbook.yaml>
 ansible-playbook -i hosts activity1.yaml
 ```
 
 * Uninstall Apache2 in AnsibleNode in manual
-  login into node1 (ansiblemaster node) 
+  login into node1 (ansiblemaster node)
     ^ ssh <private IP node1>
-- delete manual
+
+* delete manual
     ^ sudo apt purge apache2 -y
 
-* once uninstall apache in master node 
+* once uninstall apache in master node
   ansible automatically create again the application.....
-    ^ ansible-playbook -i hosts activity.yaml
-
+    ^ ansible-playbook -i hosts activity.yaml\
 
 # Actual state
-  - The actual state refers to the current state or configuration of a system or set of systems. 
-  - It is the state of the system as it exists at the moment when you run Ansible.
+
+* The actual state refers to the current state or configuration of a system or set of systems.
+* It is the state of the system as it exists at the moment when you run Ansible.
 
 # Desired state
-  - The desired state is the state or configuration that you want your system or systems to be in. 
-  - It represents the end state you are aiming to achieve after running an Ansible playbook.
 
-# Configuration Drift:
-  -  the situation where the configuration of a managed system changes over time, deviating from the desired or defined state.
-  - whre the ansible present actual state or desired state.....
+* The desired state is the state or configuration that you want your system or systems to be in.
+* It represents the end state you are aiming to achieve after running an Ansible playbook.
 
+# Configuration Drift
 
-# Activity 2: 
+* the situation where the configuration of a managed system changes over time, deviating from the desired or defined state.
+* whre the ansible present actual state or desired state.....
+
+# Activity 2
+
      Install php on apache server    ----> RT (47:00)
+
 # PHP
-  - Popular Programing language
-  - devoping language for web applications..
-      - Eg: FB devloped in PHP language
+
+* Popular Programing language
+* devoping language for web applications..
+  * Eg: FB devloped in PHP language
   
 * Manual steps:
+
 ```bash
   ^ cd /tmp
 sudo apt udpate 
@@ -383,10 +390,13 @@ sudo apt install apache2 -y
 
 sudo apt install php libapache2-mod-php php-mysql -y
 ```
-  * Lets create a file `/var/www/html/info.php` with the following content.
+
+* Lets create a file `/var/www/html/info.php` with the following content.
+
 ```
 <?php phpinfo(); ?>
 ```
+
     - in the test VM 
         ^ cd /tmp
         ^ sudo -i
@@ -397,13 +407,15 @@ sudo apt install php libapache2-mod-php php-mysql -y
     - now access the ip address  --> apache server
           ip//var/www/html/info.php   ---> php server
 ----------------------
+
 * Play Book:-
-    - create folder `Php`  inside php 2 files..
-        --> `activity2` 
+  * create folder `Php`  inside php 2 files..
+        --> `activity2`
         --> `hosts.ini`
         --> `info.php`
 
 activity2.yml
+
 ```bash
 ---
 - name: Install PHP
@@ -429,32 +441,41 @@ activity2.yml
         src: info.php
         dest: /var/www/html/info.php
 ```
+
 hosts.ini
+
 ```
 [php]
 172.31.43.40
 ```
 
 info.php
+
 ```s
 <?php phpinfo(); ?>
 ```
+
     ^ ansible-playbook --syntax-check -i hosts.ini activity2.yml
     ^ ansible-playbook --check -i hosts.ini activity2.yml
     ^ ansible-playbook -i hosts.ini activity2.yml
 
 ## Activity 3: Install PHP on redhat  ---> RT (01:24:00)
-  * Perform the activity2 on redhat
+
+* Perform the activity2 on redhat
 
 * manual steps:
+
 ```sh
 sudo dnf install httpd -y
 sudo dnf install php php-cli php-common php-gd php-mysqlnd php-pdo -y
 ```
+
 Lets create a file `/var/www/html/info.php` with the following content
+
 ```s
 <?php phpinfo(); ?>
 ```
+
   ^ cd /tmp
         ^ sudo -i
         ^ echo '<?php phpinfo(); ?>'
@@ -464,9 +485,8 @@ Lets create a file `/var/www/html/info.php` with the following content
     - now access the ip address  --> apache server
           ip//var/www/html/info.php   ---> php server
 
-
 * -> I need to setup a redhat vm with devops user.
-  - install RedHat VM (free)
+  * install RedHat VM (free)
       login the VM...
   [connect to ssh clint]
       ^ ssh ec2-user@<public ip>
@@ -482,9 +502,12 @@ Lets create a file `/var/www/html/info.php` with the following content
       ^ sudo systemctl restart sshd
 
   * Add sudo to  user
-<!-- ^ sudo usermod -aG wheel runner -->  -> this is password based, we need password less 
+
+<!-- ^ sudo usermod -aG wheel runner -->  -> this is password based, we need password less
       ^ sudo visudo 
-  # %wheel     ALL-(ALL)     NOPASSWD: ALL
+
+# %wheel     ALL-(ALL)     NOPASSWD: ALL
+
     runner    ALL-(ALL)     NOPASSWD: ALL
 
       ^ exit
@@ -497,20 +520,22 @@ Lets create a file `/var/www/html/info.php` with the following content
 
     ^ sudo dnf --help
 
-  * now comming to the ansible-controle plane 
+* now comming to the ansible-controle plane
       ^ ssh-copy-id runner@<ip>
   password: *****
 
-  * cross check whether its is work or not...
+* cross check whether its is work or not...
     ^ ssh <public ip of redhat>
-    ^ ssh-copy-id <public ip> 
+    ^ ssh-copy-id <public ip>
+
 ----------------
 
-* Create a file `readhat` 
+* Create a file `readhat`
       ---> activity3.yml
       ---> hosts.ini
 
 activity3.yml
+
 ```bash
 ---
 - name: activity 3 install apache and php
@@ -530,10 +555,13 @@ activity3.yml
         content: '<?php phpinfo(); ?>'
         dest: /var/www/html/info.php
 ```
+
 hosts.ini
+
 ```s
 <private ip adress of redhat>
 ```
+
   ^ ansible-playbook --syntax-check -i hosts.ini activity3.yaml
   ^ ansible-playbook --check -i hosts.ini activity3.yaml
   ^ ansible-playbook -i hosts.ini activity3.yaml
@@ -541,8 +569,9 @@ hosts.ini
   -> once done copy public ip of node2 (readhat) web:--> `httpd://<ip>/info.php`
 
   -> application was not run beauser redhat needs `service module`
- 
+
 activity3.yaml
+
 ```sh
 continue:-
     - name: ensure httpd is running
@@ -551,6 +580,7 @@ continue:-
         enabled: yes
         state: started
 ```
+
     ^ ansible-playbook --syntax-check -i hosts.ini activity3.yaml
     ^ ansible-playbook --check -i hosts.ini activity3.yaml
     ^ ansible-playbook -i hosts.ini activity3.yaml
@@ -558,16 +588,20 @@ continue:-
    -> once done copy public ip of node2 (readhat) web:--> `httpd://<ip>/info.php`
 
 # Activity: Use the same playbook for ubuntu and redhat machines
+
 * To do this activity, the two topics which we need to understand are
       - inventory groups
       - facts
 
 =====================================================================
-## 08/10/23
-## Inventories in Ansible
-  - Inventory is collection of nodes.
 
-  - Inventory is of two types
+## 08/10/23
+
+## Inventories in Ansible
+
+* Inventory is collection of nodes.
+
+* Inventory is of two types
       1. Static
       2. Dynamic
 
@@ -576,6 +610,7 @@ continue:-
     2. yaml format
 
 * ini format
+
 ```sh
 ipaddress/name
 
@@ -587,20 +622,24 @@ ipaddress/name
 ipaddress/name
 ipaddress/name
 ```
+
 * Create folder `Inventory`
       - example1
           add 3 nodes of public ip
-      - example2 
+      - example2
 
 exaple1
+
 ```bash
 52.90.169.156
 18.209.176.46
 34.229.22.99
 ```
+
     ^ ansible -i example1 all --list-host
 
 example2
+
 ```sh
 [local]
 52.90.169.156
@@ -616,15 +655,18 @@ example2
 [redhat]
 34.229.22.99
 ```
+
      ^ ansible -i example2 local --list-hosts
      ^ ansible -i example2 nodes --list-hosts
 
 ## fact collection
+
     - fact is some information about ansible machen
-  * Create a inside `Inventory` folder `facts.json`
+
+* Create a inside `Inventory` folder `facts.json`
 
 * How to collect facts
-    - once done inventory file, to setup .....
+  * once done inventory file, to setup .....
 
     ^  ansible -i example2 local -m setup
   if you want to need less or only json formet...
@@ -634,8 +676,9 @@ example2
 
 facts.json
 NOTE: im not add all the facts due to space issue....
-```
-{
+
+```sh
+
     "ansible_facts": {
         "ansible_all_ipv4_addresses": [
             "172.31.47.184"
@@ -664,42 +707,44 @@ NOTE: im not add all the facts due to space issue....
     "changed": false
 }
 ```
+
 * change a module:-
     ^ ansible -i example2 local -m setup -a "filter=*os*"
-    ^ ansible -i example2 local -m setup -a "filter=*_os_*"
+    ^ ansible -i example2 local -m setup -a "filter=**os**"
 
-    ^ ansible -i example2 all -m setup -a "filter=*_os_*"
+    ^ ansible -i example2 all -m setup -a "filter=**os**"
 
-## Activity 4: installing php in both redhat and ubuntu:
+## Activity 4: installing php in both redhat and ubuntu
 
-  * What is needed?
-      - inventory
-      - facts
-      - using facts with conditionals.
-
-  
+* What is needed?
+  * inventory
+  * facts
+  * using facts with conditionals.
 
 ========================================================================
+
 ## 10/10/23
-### Install TOMCAT ..by RamJagadesh sir...
+
+### Install TOMCAT ..by RamJagadesh sir
 
 create a instance ubuntu (t2.medium)
+
 * Manual stepts:
-    * tomcat install on ubuntu22.04
-	- install java11
-	- install tomcat setup
+  * tomcat install on ubuntu22.04
+    * install java11
+    * install tomcat setup
     ^ sudo useradd -m -d /opt/tomcat -U -s /bin/false tomcat
     ^ sudo apt update
     ^ sudo apt install default-jdk
     ^ java -version
     ^ cd /tmp
 
-    * web:- tomcat packages tar file
+  * web:- tomcat packages tar file
   chose the latest version `10.1.15`
-        * core:
+    * core:
             tar.gz (pgp, sha512) - copy this zip file (rightclick)
 
-    ^ wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.15/bin/apache-tomcat-10.1.15.tar.gz
+    ^ wget <https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.15/bin/apache-tomcat-10.1.15.tar.gz>
     ^ ls
   apache-tomcat-10.1.15.tar.gz
 
@@ -718,13 +763,13 @@ create a instance ubuntu (t2.medium)
 tomcat ownership
     ^ sudo chown -R tomcat:tomcat /opt/tomcat/
       sudo chmod -R u+x /opt/tomcat/bin
-    
+
   * create a service
     service file
-        - serves file give a reloade for your application 
+        - serves file give a reloade for your application
             once your vm was stoped the serve file cat resart automatically your application...
 
-      - we need to java (we have already install java11)
+    * we need to java (we have already install java11)
     ^ java --version (or) ^ sudo update-java-alternatives -l
   
   we needs to bin file, give r,w permitions on /bin file
@@ -747,6 +792,7 @@ tomcat ownership
     ^ cd ~
     ^ sudo vi (nano) /etc/systemd/system/tomcat.service
   add to service file
+
 ```bash
 [Unit]
 Description=Tomcat
@@ -774,6 +820,7 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+
     ^ sudo systemctl daemon-reload
 <!-- once again give a file permision foe the your application not get the commad...
     ^ sudo chown -R tomcat:tomcat /opt/tomcat/
@@ -784,40 +831,44 @@ WantedBy=multi-user.target
   now check service run are not....??
 
     ^ sudo systemctl enable tomcat.service
-  its careate a symlink (symbalic link) - its reeboot your application 
-    and restart your application 
-    
+  its careate a symlink (symbalic link) - its reeboot your application
+    and restart your application
+
   take the public ip of vm <ip:8080>
 
-# playbook for tomcat:
+# playbook for tomcat
 
 * create tomcat user and directory
-    - sudo useradd -m -d /opt/tomcat -U -s /bin/false tomcat
+  * sudo useradd -m -d /opt/tomcat -U -s /bin/false tomcat
 
 * update & install packages
-    - default-jdk
+  * default-jdk
 
 * go to temp dir & download tomcat packages
-    - /tmp/apache-tomcat-10.1.15.tar.gz
+  * /tmp/apache-tomcat-10.1.15.tar.gz
 
 * unzip tomcat files to (unarchive module in ansible)
-    - /tmp/apache-tomcat-10.1.15.tar.gz
-    - /opt/tomcat
-    - --strip-components=1
+  * /tmp/apache-tomcat-10.1.15.tar.gz
+  * /opt/tomcat
+  * --strip-components=1
 
 * unzip tomcat files to (file module)    -----> RT (01:15:00)
+
 * change owner and group
-    - 
+    -
 
 * create service file and add service file
-    - 
+    -
 
 * service file
-    - 
+    -
 
 ======================================================================
+
 ## 11/10/23
-### Install TomCat..by khaja sir...
+
+### Install TomCat..by khaja sir
+
 [https://linuxize.com/post/how-to-install-tomcat-10-on-ubuntu-22-04/]
 
 ```bash
@@ -864,9 +915,11 @@ sudo chown -R tomcat: /opt/tomcat
 sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
 # Add execute permissions to all scripts in bin directory
 ```
+
 ==========================
 
 * Automation :-
+
 ```bash
 # - name: install tomcat 10
 #   become: yes
