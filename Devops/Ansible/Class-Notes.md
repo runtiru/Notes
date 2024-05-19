@@ -14,12 +14,17 @@
 * Distubuations
 * Shell
 
-* Debian Family     * Redhat Family
-    - Ubuntu          - Redhat
-    - Kali            - Fedora
-    - Debian          - Centos
-                      - RHEL
-                      - Amazon Linux
+Debian Family  
+    - Ubuntu
+    - Kali
+    - Debian
+
+Redhat Family
+    - Redhat
+    - Fedora
+    - Centos
+    - RHEL
+    - Amazon Linux
 ==================================================================
 
 ## 05/10/23
@@ -29,20 +34,32 @@
 ## Create a user and Setting up password less authentication between linux machines:-
 
 * Create 2 instances
-    server-1 and server-2
+    server-1 and server-2 &
     login that matchane
-    ^ ssh -i ~/downloads`tab`\<key.pem> ubuntu@<IP>   --->Both
 
-  * passwd authuntication yes
-    ^ sudo vi(nano) /etc/ssh/sshd_config  ---Both users
+```sh
+ssh -i ~/downloads`tab`\<key.pem> ubuntu@<IP>   --->Both
+```
+
+* passwd authuntication yes
+
+```sh
+sudo vi(nano) /etc/ssh/sshd_config  --->Both users
+```
   PasswordAuthentication `yes`
    `Esc:wq!`
 
-  * restaer the server
-  ^ sudo systermctl restart sshd  ---Both users
+* restaer the server
 
-  * create user
-  ^ sudo adduser devops ----Both users
+```sh
+sudo systermctl restart sshd  --->Both users
+```
+
+* create user
+
+```sh
+sudo adduser devops ---->Both users
+```
   Password:<runner>
 
   * communicate with 2 servers
