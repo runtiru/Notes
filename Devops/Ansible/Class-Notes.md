@@ -14,12 +14,11 @@
 * Distubuations
 * Shell
 
-Debian Family  
+* Debian Family  
     - Ubuntu
     - Kali
     - Debian
-
-Redhat Family
+* Redhat Family
     - Redhat
     - Fedora
     - Centos
