@@ -18,12 +18,14 @@
     - Ubuntu
     - Kali
     - Debian
+
 * Redhat Family
     - Redhat
     - Fedora
     - Centos
     - RHEL
     - Amazon Linux
+
 ==================================================================
 
 ## 05/10/23
@@ -33,8 +35,7 @@
 ## Create a user and Setting up password less authentication between linux machines:-
 
 * Create 2 instances
-    server-1 and server-2 &
-    login that matchane
+    server-1 and server-2 & login that matchane
 
 ```sh
 ssh -i ~/downloads`tab`\<key.pem> ubuntu@<IP>   --->Both
@@ -61,20 +62,24 @@ sudo adduser devops ---->Both users
 ```
   Password:<runner>
 
-  * communicate with 2 servers
-  ^ ssh devops@<private ip of server2>  ---(1)
-    Password: *****
-  ^ exit
+* communicate with 2 servers
 
-# Adding user to sudo    ------>RT (14:00)
+```sh
+ssh devops@<private ip of server2>  ---(1)
+```
+Password: *****
+exit
+
+* Adding user to sudo    ------>RT (14:00)
 
 * Adding user to sudo     ----Both users
-  ^ sudo visudo
-  In %sudo-->
+
+```sh
+sudo visudo
+```
+In %sudo-->
   devops ALL=(ALL:ALL) NOPASSWD:ALL
-<!-- Ctrl+o
-        enter
-          ctrl+x -->
+<Ctrl+o enter ctrl+x -->
 
 * switch user     ---Both users
   ^ su devops
@@ -86,10 +91,10 @@ sudo adduser devops ---->Both users
     /home/devops
 
     ^ sudo apt update   ---Both users
-    * login form one server to another server   ----->RT (21:00)
-      ^ ssh <private ip server2>  ---(1)  
-        Password: *****
-        eixt
+* login form one server to another server   ----->RT (21:00)
+    ^ ssh <private ip server2>  ---(1)  
+      Password: *****
+      eixt
 
 # setting password less authountication in server1 and 2
 
@@ -122,25 +127,26 @@ In server2
     ^ cat ~/.ssh/authorized_keys
 ---xx---
 * After the ssh-copy-id is success, then we can login directly by using ip address as both machines have same username and password less authentication is setup.
-* switch to one server to another server
-<!-- 
-    In server1
+* switch to one server to another server.
+
+```sh
+In server1
     ^ ssh <ip adderss of server2>
   server1 changed to servewr2
-    ^ exit 
-    -->
+    ^ exit >
+```
 
 ## Ansible setup:-
 
-* we have two machines with common user devops
-* sudo permissions and password less authentication setup between server 1 and server 2
-* From now server 1 will be called as `Ansible Control node`
-and server 2 as `node 1`
+* we have two machines with common user devops,
+* sudo permissions and password less authentication setup between server 1 and server 2,
+* From now server 1 will be called as `Ansible Control node` and server 2 as `node 1`
 
 * Ensure python:3 is installed
-    ^ python3 --version     ------2
+  ^ python3 --version     ------2
    Python 3.10.6
-<!-- * :- If python is not installed `install pythone on ubuntu` -->
+<:- If python is not installed `install pythone on ubuntu` -->
+
 `Installing and upgrading Ansible with pip`
 [https://docs.ansible.com/ansible/latest/installation_guide/index.html]
 
