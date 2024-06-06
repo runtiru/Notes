@@ -31,6 +31,8 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 sudo apt-get update
 sudo apt-get install jenkins -y
 ```
+
+```bash
 (:wq!)
     ^ chmod +x installjenkins.sh
     ^ ./installjenkins.sh
@@ -41,19 +43,18 @@ sudo apt-get install jenkins -y
     ^ cd ~
     ^ sudo apt update
           once done apt update-( jenkins@ip-172-31-90-89:~$ )
-                                 
------------
-Goto Ec2 instance and copy the jenkins_master public ID
-    new tap on windous 
-        (past public ID:8080)
+```
+                            
+Goto Ec2 instance and copy the jenkins_master (public ID)
+    new tap on windous - (past the public ID:8080)
     now some var file ie (/var/lib/jenkins/secrets/initialAdminPassword)
-            paste the var file with ( SUDO CAT )in APS and get the password (822e62969d18491fa1f0059a29f7a028) copy 
+        paste the var file with ( SUDO CAT )in APS and get the password (822e62969d18491fa1f0059a29f7a028) 'copy'
             apst the new windows
     start JENKINS
             Create First Admin User (what ever it)
     Instance Configuration
             (save and finish)
-            ----------------
+
 2. node-1
 ---------
     ^ ssh ubuntu@ID

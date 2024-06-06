@@ -417,20 +417,37 @@ nslookup -type=ns runtiru.xyz
 
 * Now Run Kops command to created kubernetes cluster..
 ```bash
-kops create cluster --name=kubevpro.groophy.in \ 
-> --state=s3://vprofile-kop-states --zone=us-east-2a, us-east-2b \
-> --nede-count=2 --node-size=t3.small --master-size=t3.medium --dns-zone=kubevpro.groophy.in \
-> --node-volume-size=8 --master-volume-size=8
+# kops create cluster --name=kubevpro.groophy.in \ 
+# > --state=s3://vprofile-kop-states --zone=us-east-2a, us-east-2b \
+# > --nede-count=2 --node-size=t3.small --master-size=t3.medium --dns-zone=kubevpro.groophy.in \
+# > --node-volume-size=8 --master-volume-size=8
 ```
 
+```bash
+ kops create cluster --name=runtiru.xyz --state=s3://udemy-bucket-n --zones=us-east-1a,us-east-1b --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=runtiru.xyz
+```
+```bash
+kops update cluster --name runtiru.xyz --state=s3://udemy-bucket-n --yes
+```
+* Now Install HELM.. ([Helm.sh](https://helm.sh/))
+   - Get started
+   - Install Helm - the installation guide.
+   - From the Binary Releases
+      - desired version
+         - Helm v3.15.1 (Latest) - github
+            - Linux amd64 (https://get.helm.sh/helm-v3.15.1-linux-amd64.tar.gz)
+   (downlod locally & copy the link)
 
+```sh
+cd /tmp/
+wget https://get.helm.sh/helm-v3.15.1-linux-amd64.tar.gz
+tar xzvf helm-v3.15.1-linux-amd64.tar.gz
+cd linux-amd64/
+ls
+sudo mv helm /usr/local/bin/helm
 
-
-
-
-   
-
-
+kubectl get nodes
+```
 
 
 
