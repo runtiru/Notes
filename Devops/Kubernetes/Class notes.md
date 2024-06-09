@@ -1,5 +1,4 @@
 ## 05/09/23
-
 ## Kubernetes
 
 - Kubernetes (k8s) is an open source orchestrator for deploying containerized applications.
@@ -20,7 +19,7 @@
 - Kunernetes has dose not suport to Docker directly
   we need to install CRI (Container Runtime Interface) Component...
 
-- Instal those commands in `Master node` and `worker node`
+- Install those commands in `Master node` and `worker node`
   1. kubeadm (A tool used to build k8s clusters)
   - install container runtime (CRI)
 [Docker Engine does not implement CRI which is a requirement for a container runtime to work with Kubernetes]
@@ -41,59 +40,67 @@
 
  1. Controle plane (master-node)       --------RT (18:20)
     install those softwares
-  [docker,cri-dockerd,kubeadm,kubectl,kubelet]
-    ^ install docker (docer script install)
-    ^ sudo usermod -aG docker ubuntu
-    ^ exit &
+  [docker, cri-dockerd, kubeadm, kubectl, kubelet]
+
+# Docker
+```sh
+install docker (docer script install)
+sudo usermod -aG docker ubuntu
+exit & relogin
+```
+
 
 # Install CRI-dockerd
+[https://github.com/Mirantis/cri-dockerd]
+  - goto :Using cri-dockerd --> instal --> releases page. 
+      Assets --> [https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb]
+  copy this link address
+```sh
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb
 
-    [https://github.com/Mirantis/cri-dockerd]
-    - goto :Using cri-dockerd --> instal --> releases page. 
-        Assets --> [https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb]
-             copy this link address
-    ^ wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb
+sudo dpkg -i cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb
+```
+    - dpkg (Debian Package Manager)- install, remove, and manage individual software packages.
 
-    ^ sudo dpkg -i cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb
-          - dpkg (Debian Package Manager)- install, remove, and manage individual software packages.
 
 # Installing kubeadm
-
 [https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/]
 
 - Kubernetes package repositories
-    ^ sudo apt-get update
-    ^ sudo apt-get install -y apt-transport-https ca-certificates curl
+```sh
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
 
-    ^ curl -fsSL <https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key>
-    ^sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+curl -fsSL <https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key>
+sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
-    ^ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] <https://pkgs.k8s.io/core:/stable:/v1.28/deb/> /'
-    ^ sudo tee /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] <https://pkgs.k8s.io/core:/stable:/v1.28/deb/> /'
+sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-    ^ sudo apt-get update
-    ^ sudo apt-get install -y kubelet kubeadm kubectl
-    ^ sudo apt-mark hold kubelet kubeadm kubectl
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
 
-    ^ kubectl version
-    ^ kubeadm version
-
+kubectl version
+kubeadm version
+```
 `move to root user`
     ^ sudo -i
 now installize the cluster (CRI) - [NOTE:-]no need to give cloud (aws)
 
 # kubeadm init
+```sh
+kubeadm init --pod-network-cidr "10.244.0.0/16" --cri-socket "unix:///var/run/cri-dockerd.sock"
+```
 
-    ^ kubeadm init --pod-network-cidr "10.244.0.0/16" --cri-socket "unix:///var/run/cri-dockerd.sock"
-
-connact with 2 nodes
-now copy the commands after kubernetes instialized controle-plane
-    <!-- mkdir -p $......
-    sudo cjp -i.....
-    sudo chown $....
-    .... 
-    ....
-    .... -->
+* connact with 2 nodes
+    now copy the commands after kubernetes instialized controle-plane
+      mkdir -p $......
+      sudo cjp -i.....
+      sudo chown $....
+      .... 
+      ....
+      ....
 -------xxxxxx-------
 
 `move to normal user` and apply those commands of [kubernetes instialized controle-plane]     ------RT(43:00)
@@ -106,34 +113,39 @@ check the nodes
 ---xx---
 ---xx---
 
-# 2. Node-1
+## 2. Node-1
 
     install those softwares
   [docker,cri-dockerd,kubeadm,kubectl,kubelet]
-    ^ install docker (docer script install)
-    ^ sudo usermod -aG docker ubuntu
-    ^ exit & relogin
-
+  * Docker
+```sh
+install docker (docer script install)
+sudo usermod -aG docker ubuntu
+exit & relogin
+```
 - same as master node:-
   - install CRI-dockerd:-
-    ^ wget <https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb>
-    ^ sudo dpkg -i cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb
+```sh
+wget <https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb>
+
+sudo dpkg -i cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb
+```
 
 # Installing kubeadm
+```sh
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
 
-    ^ sudo apt-get update
-    ^ sudo apt-get install -y apt-transport-https ca-certificates curl
-
-    ^ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key
-    ^ sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key
+sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
    
-    ^ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /'
-    ^ sudo tee /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /'
+sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-    ^ sudo apt-get update
-    ^ sudo apt-get install -y kubelet kubeadm kubectl
-    ^ sudo apt-mark hold kubelet kubeadm kubectl
-
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+```
 `move to root user` -----RT (45:45)
     ^ sudo -i
 -- now execute the join command
@@ -144,9 +156,9 @@ check the nodes
 
 - Controle plane (master node)
 `faninal uploade`
-    <!-- 
-    ^ kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml 
-    -->
+```sh
+kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml 
+```
 
     ^ kubectl get nods
 ip-172-31-12-245   Ready    <none>          72s   v1.28.2
@@ -169,11 +181,9 @@ ip-172-31-8-168    Ready    control-plane   27m    v1.28.2   172.31.8......
     - we used to less IP address
     - it is usease overlay and underlay
 
-========================================================================
+===========================================================
 
 ## 08/09/23
-
-------------
 [https://directdevops.blog/2023/09/08/devops-classroomnotes-08-sep-2023/]
 
 ### POD
