@@ -20,7 +20,8 @@
   we need to install CRI (Container Runtime Interface) Component...
 
 - Install those commands in `Master node` and `worker node`
-  1. kubeadm (A tool used to build k8s clusters)
+
+1. kubeadm (A tool used to build k8s clusters)
   - install container runtime (CRI)
 [Docker Engine does not implement CRI which is a requirement for a container runtime to work with Kubernetes]
 [https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/]
@@ -35,11 +36,10 @@
 ---xx---
 
 # Installation steps
+  - Each matchine have atleast 2vcpus and 4GB RAM
 
-    - Each matchine have atleast 2vcpus and 4GB RAM
-
- 1. Controle plane (master-node)       --------RT (18:20)
-    install those softwares
+1. Controle plane (master-node)       --------RT (18:20)
+    - install those softwares
   [docker, cri-dockerd, kubeadm, kubectl, kubelet]
 
 # Docker
@@ -48,7 +48,6 @@ install docker (docer script install)
 sudo usermod -aG docker ubuntu
 exit & relogin
 ```
-
 
 # Install CRI-dockerd
 [https://github.com/Mirantis/cri-dockerd]
@@ -60,8 +59,7 @@ wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.4/cri-docker
 
 sudo dpkg -i cri-dockerd_0.3.4.3-0.ubuntu-jammy_amd64.deb
 ```
-    - dpkg (Debian Package Manager)- install, remove, and manage individual software packages.
-
+  - dpkg (Debian Package Manager)- install, remove, and manage individual software packages.
 
 # Installing kubeadm
 [https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/]
@@ -94,13 +92,13 @@ kubeadm init --pod-network-cidr "10.244.0.0/16" --cri-socket "unix:///var/run/cr
 ```
 
 * connact with 2 nodes
-    now copy the commands after kubernetes instialized controle-plane
-      mkdir -p $......
-      sudo cjp -i.....
-      sudo chown $....
-      .... 
-      ....
-      ....
+  - now copy the commands after kubernetes instialized controle-plane
+    - mkdir -p $......
+    - sudo cjp -i.....
+    - sudo chown $....
+    - .... 
+    - ....
+    - ....
 -------xxxxxx-------
 
 `move to normal user` and apply those commands of [kubernetes instialized controle-plane]     ------RT(43:00)
@@ -110,7 +108,7 @@ kubeadm init --pod-network-cidr "10.244.0.0/16" --cri-socket "unix:///var/run/cr
 check the nodes
     ^ kubectl get nodes
     [STATUS : NotReady -- Pod Network is not ready]
----xx---
+
 ---xx---
 
 ## 2. Node-1

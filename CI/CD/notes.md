@@ -57,7 +57,7 @@ start using jenkins now......
 If you want to change jenkins URL 
    - Goto Manage jenkins - systerm - jenkins location (jenkins URL)
 
-===============================================================================================
+====================================================================================
 
 # 2. Sonar-Server SetUp:
 ------------------------
@@ -227,7 +227,7 @@ Add credentials
 select the server authountication token - kube-sonar-token
 
 seve settings...
-----------
+
 Now goto jenkins ce2 to allow securty connection for sonarqube server
 
 jenkins ce2 open security settings, add inbond rules - add rule - (all traffic : sonar-sgn) - save
@@ -278,12 +278,12 @@ restart the machine
 
 ================================================================
 
-# 3. Kops (Kubernetes) - SetUp
+## 3. Kops (Kubernetes) - SetUp
 ------------------------------
 Create EC2 for Kubernetes (Kops)
-        New Key pair (Kops-key)
-        New Security group (Kops-SGN)
-        - Inbound Security Group Rules - SSH & My Ip
+   - New Key pair (Kops-key)
+   - New Security group (Kops-SGN)
+      - Inbound Security Group Rules - SSH & My Ip
 
 - Now Create Kubernetes cluster:
    useing Kops command (note - Kops is not part of k8s cluster)
@@ -293,7 +293,7 @@ Create EC2 for Kubernetes (Kops)
    - Route 53
    - Iam user
 
-* Create S3 bucket
+# Create S3 bucket
 ------------------
    - General configuration
       - AWS Region - US East (N. Virginia) us-east-1
@@ -309,7 +309,7 @@ Create EC2 for Kubernetes (Kops)
  Create bucket...
 
 
-* Create IAM
+# Create IAM
 ------------
    - IAM Dashboard (IAM - Users - Create user)
       - Name: kopsadmin (next)
@@ -326,12 +326,12 @@ Open the user
 
 (Download .csv file) - Done..
       
-* Create Route 53
+# Create Route 53
 ------------------
 Route 53 Dashboard
    - Create hosted zone
    - Hosted zone configuration
-      - Domain name: kubevpro.groophy.in
+      - Domain name: kubevpro.groophy.in (ram.runtiru.xyz)
       - Description optional: 
       - Type - Public hosted zone
    Created Hosted zone....
@@ -340,7 +340,7 @@ Route 53 Dashboard
       - Domain Portfolio - DNS - Add New Record - Type (NS: Nameserver)
 
 add like this to "Route 53 to Goodaddy"
-   NS - kubevpro - ns-1458.awsdns-54.org.
+   NS - kubevpro - ns-1458.awsdns-54.org.  (NS - ram - ns-1458.awsdns-54.org. )
    NS - kubevpro - ns-381.awsdns-47.com.
    NS - kubevpro - ns-1855.awsdns-39.co.uk.
    NS - kubevpro - ns-569.awsdns-07.net.
@@ -380,13 +380,15 @@ web - Install and Set Up kubectl on Linux
 * Install kubectl binary with curl on Linux
    - Download the latest release with the command:
 ```bash
-# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
-# ls 
-# chmod +x ./kubectl
-# sudo mv kubectl /usr/local/bin
+ls 
+chmod +x ./kubectl
+sudo mv kubectl /usr/local/bin
+kubectl --hepl (conform kubectl install or not)
 ```
-* Install kops (Old versin - v1.26.4)
+# Install kops (Old versin - v1.26.4)
+--------------
    - https://github.com/kubernetes/kops/releases?page=3
    - v1.26.4
    - Assets "kops-linux-amd64" - copy the link (dont download manully)
@@ -403,20 +405,22 @@ kops version (v1.26.4)
 
 * Now verfy the domain
 ```bash
-nslookup -type=ns kubevpro.groophy.in 
+nslookup -type=ns kubevpro.groophy.in (ram.runtiru.xyz)
+```
 (4 name server on visible)
-```
+Server:         127.0.0.53
+Address:        127.0.0.53#53
 
-* check name services on vm
-```bash
-nslookup -type=ns kubevpro.groophy.in
-(or)
-nslookup -type=ns runtiru.xyz
+Non-authoritative answer:
+ram.runtiru.xyz nameserver = ns-904.awsdns-49.net.
+ram.runtiru.xyz nameserver = ns-1231.awsdns-25.org.
+ram.runtiru.xyz nameserver = ns-2023.awsdns-60.co.uk.
+ram.runtiru.xyz nameserver = ns-441.awsdns-55.com.
+-------
 
-```
-
-* Now Run Kops command to created kubernetes cluster..
-```bash
+# Create kubernetes cluster
+   - Run Kops command to created kubernetes cluster..
+```sh
 # kops create cluster --name=kubevpro.groophy.in \ 
 # > --state=s3://vprofile-kop-states --zone=us-east-2a, us-east-2b \
 # > --nede-count=2 --node-size=t3.small --master-size=t3.medium --dns-zone=kubevpro.groophy.in \
@@ -424,12 +428,26 @@ nslookup -type=ns runtiru.xyz
 ```
 
 ```bash
- kops create cluster --name=runtiru.xyz --state=s3://udemy-bucket-n --zones=us-east-1a,us-east-1b --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=runtiru.xyz
+ kops create cluster --name=ram.runtiru.xyz --state=s3://udemy-bucket-n --zones=us-east-1a,us-east-1b --node-count=2 --node-size=t2.micro --master-size=t2.medium --dns-zone=ram.runtiru.xyz --node-volume-size=8 --master-volume-size=8
 ```
+
 ```bash
 kops update cluster --name runtiru.xyz --state=s3://udemy-bucket-n --yes
 ```
-* Now Install HELM.. ([Helm.sh](https://helm.sh/))
+
+```bash
+kops validate cluster --state=s3://udemy-bucket-n 
+
+kubectl get nodes
+```
+* Delete cluster..
+```sh
+ kops delete cluster --name=ram.runtiru.xyz --state=s3://udemy-bucket-n --yes
+```
+
+
+# Install HELM.. 
+([Helm.sh](https://helm.sh/))
    - Get started
    - Install Helm - the installation guide.
    - From the Binary Releases
@@ -447,8 +465,6 @@ ls
 sudo mv helm /usr/local/bin/helm
 
 kubectl get nodes
-```
-
 
 
 ============================================================
