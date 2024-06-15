@@ -28,10 +28,10 @@
   - Required ports
 [https://kubernetes.io/docs/reference/networking/ports-and-protocols/]
 
-  2. kubectl
+2. kubectl
   - Kubernetes-specific command line tool that lets you communicate and control Kubernetes clusters.
 
-  3. kubelet
+3. kubelet
   - The primary "node agent" that runs on each node.
 ---xx---
 
@@ -185,14 +185,13 @@ ip-172-31-8-168    Ready    control-plane   27m    v1.28.2   172.31.8......
 [https://directdevops.blog/2023/09/08/devops-classroomnotes-08-sep-2023/]
 
 ### POD
+  - Atomic Unit:
+  - a pod is a basic unit of deployment in Kubernetes
+  - A pod is the smallest and simplest unit in the Kubernetes object model.
+  - It can contain one or more containers, but those containers are always scheduled to run on the same node and share the same network namespace and storage.
 
-    * Atomic Unit:
-    - a pod is a basic unit of deployment in Kubernetes
-    - A pod is the smallest and simplest unit in the Kubernetes object model.
-    - It can contain one or more containers, but those containers are always scheduled to run on the same node and share the same network namespace and storage.
-
-- Pod have run the container
-  - one contaienr is best for a pod
+  - Pod have run the container
+    - one contaienr is best for a pod
 
 - Pod have more than one containers
     1. Maincar container
@@ -371,15 +370,15 @@ goto mastaer node   -----RT (53:00)
     ^ mkdir manifests --> cd manifests
     ^ vi hello-pod.yaml
 paste the content heare
-
-    ^ kubectl apply -f hello-pod.yaml [created a pod]
-    ^ kubectl get pods  [list of pods]
-    ^ kubectl get pods -o wide [more information of pods]
-
+```sh
+kubectl apply -f hello-pod.yaml [created a pod]
+kubectl get pods  [list of pods]
+kubectl get pods -o wide [more information of pods]
+```
 all information about your pod
     ^ kubectl get pods <name of pod> -o yaml
 
-========================================================================
+=================================================================
 
 ## 09/09/23
 
