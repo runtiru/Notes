@@ -829,35 +829,43 @@ sudo chown -R tomcat:tomcat /opt/tomcat/
 sudo chmod -R u+x /opt/tomcat/bin
 ```
 
-  * create a service
-    service file
-        - serves file give a reloade for your application
-            once your vm was stoped the serve file cat resart automatically your application...
+* create a service
+  - service file
+    - serves file give a reloade for your application
+      - once your vm was stoped the serve file cat resart automatically your application...
 
-    * we need to java (we have already install java11)
-    ^ java --version (or) ^ sudo update-java-alternatives -l
-  
+  * we need to java (we have already install java11)
+```sh
+java --version (or) ^ sudo update-java-alternatives -l
+```
+
   we needs to bin file, give r,w permitions on /bin file
-    ^ sudo chmod 755 /opt/tomcat/bin
-    ^ cd /opt/tomcat/bin
-    ^ ls
+```sh
+sudo chmod 755 /opt/tomcat/bin
+cd /opt/tomcat/bin
+ls
+```
   some jar, xml, sh files....
-    ^ sudo sh startup.sh
-  now the tomcat service run.....
+```sh
+sudo sh startup.sh
+```
+  now the tomcat service run....
+    - take the public ip of vm <ip:8080>
+```sh
+sudo ./shutdown.sh
+```
+    - take the public ip of vm <ip:8080>
 
-  take the public ip of vm <ip:8080>
-
-    ^ sudo ./shutdown.sh
-   take the public ip of vm <ip:8080>
   now the application was unable to access....
     becose there no serves file....
 
   * create a service
-    first move to home direcoty
-    ^ cd ~
-    ^ sudo vi (nano) /etc/systemd/system/tomcat.service
+      - first move to home direcoty
+```sh
+cd ~
+sudo vi (nano) /etc/systemd/system/tomcat.service
+```
   add to service file
-
 ```bash
 [Unit]
 Description=Tomcat
@@ -885,26 +893,34 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-
-    ^ sudo systemctl daemon-reload
-<!-- once again give a file permision foe the your application not get the commad...
-    ^ sudo chown -R tomcat:tomcat /opt/tomcat/
+```sh
+sudo systemctl daemon-reload
+```
+  - once again give a file permision foe the your application not get the commad...
+```sh
+sudo chown -R tomcat:tomcat /opt/tomcat/
       sudo chmod -R u+x /opt/tomcat/bin -->
 
-    ^ sudo systemctl start tomcat.service
-    ^ sudo systemctl status tomcat.service
-  now check service run are not....??
+sudo systemctl start tomcat.service
+sudo systemctl status tomcat.service
+```
 
-    ^ sudo systemctl enable tomcat.service
+  now check service run are not....??
+```sh
+sudo systemctl enable tomcat.service
+```
+
   its careate a symlink (symbalic link) - its reeboot your application
     and restart your application
 
-  take the public ip of vm <ip:8080>
+  - take the public ip of vm <ip:8080>
 
-# playbook for tomcat
+## playbook for tomcat
 
 * create tomcat user and directory
-  * sudo useradd -m -d /opt/tomcat -U -s /bin/false tomcat
+```sh
+sudo useradd -m -d /opt/tomcat -U -s /bin/false tomcat
+```
 
 * update & install packages
   * default-jdk
@@ -928,7 +944,7 @@ WantedBy=multi-user.target
 * service file
     -
 
-======================================================================
+=================
 
 ## 11/10/23
 
