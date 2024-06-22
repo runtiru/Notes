@@ -936,13 +936,13 @@ sudo useradd -m -d /opt/tomcat -U -s /bin/false tomcat
 * unzip tomcat files to (file module)    -----> RT (01:15:00)
 
 * change owner and group
-    -
+    
 
 * create service file and add service file
-    -
+    
 
 * service file
-    -
+    
 
 =================
 
@@ -996,8 +996,6 @@ sudo chown -R tomcat: /opt/tomcat
 sudo sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
 # Add execute permissions to all scripts in bin directory
 ```
-
-==========================
 
 * Automation :-
 
