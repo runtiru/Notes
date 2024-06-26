@@ -93,9 +93,9 @@ Password: *****
 & eixt
 ```
 
-# setting password less authountication in Both servers
+## setting password less authountication in Both servers
 
-* create key pair in sercer1    ---(1)
+* create key pair in server1    ---(1)
 ```sh
 ssh-keygen
 ```
@@ -144,8 +144,8 @@ ssh <ip adderss of server2>
 server1 changed to servewr2
 exit >
 ```
-
-## Ansible setup :-
+==================================
+# Ansible setup :-
 
 * we have two machines with common user name devops,
 * sudo permissions and password less authentication setup between server 1 and server 2,

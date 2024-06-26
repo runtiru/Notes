@@ -1,9 +1,9 @@
-## Ansible setup
+# Ansible setup
 
 * Create Master(controle) node instance..
     - Name: A_controle
     - OS `Ubuntu`
-    - create new key pair `Acontrolekey.pem` 
+    - create new key pair `Acontrolekey.pem`  (controlekey.pem)
     - security group `Acontrole-SG`
         - ssh 22 allow form `MY IP` 
         - Lanch instances
@@ -15,11 +15,11 @@
 
     - OS `Centos9` CentOS Stream 9(x86_64)
     - Instance type `T2.micro`
-    - New Key `A_Nodes.key`
-    - SG `A-Node-SG`
+    - New Key `Anodeskey.pem`       (clintkey.pem)
+    - SG `Anodes-SG`
         - ssh 22 allow form `MY IP`
     - Add onemore SG role
-        - CustomeTCP 22 allow form Coustom `A_Controle-SG`
+        - CustomeTCP 22 allow form Coustom source `Acontrole-SG`
     - Lanch instances
 
 * Login controle node..
@@ -50,7 +50,7 @@ sudo apt install ansible -y
 ansible --version (ansible & Python)
 ```
 ===========
-# Inventory
+## Inventory
     - it provide to basic information about ansible targets like ip address, username, password, keys, portnubers....
 
 - two types to write inventory files
@@ -62,7 +62,7 @@ ansible --version (ansible & Python)
     - default ansible inventory file `/etc/ansible/hosts`
 
 * Login Controle instance 
-    - create a folder `vprofile` 
+    - create a folder `vprofile` ---> controle node
 ```sh
 mkdir vprofile
 cd vprofile
@@ -77,11 +77,11 @@ all:
     web01:
       ansible_host: <private ip of web01>
       ansible_user: <ec2-user>
-      ansible_ssh_private_key_file: A_Controlekey.pem
+      ansible_ssh_private_key_file: Anodeskey.pem
 ```
 save & quit (Ese :wq!)
     - exit Ec2
-    - cat Downloads/A_Controle.key
+    - cat Downloads/Anodeskey.pem
 copy the total key (becarefull)
 
 login again the controle node..
@@ -89,7 +89,7 @@ login again the controle node..
     ^ cd vprofile/exercise1
     ^ ls (inventory)
     ^ cat inventory
-    ^ vim A_Controlekey.pem (clientkey.pem)
+    ^ vim Anodeskey.pem (clientkey.pem)
     - paste the total key data
 * give a file permitions
     ^ ls -l (-rw-rw-r--  clintkey and inventory)
@@ -127,13 +127,13 @@ ansible web01 -m ping -i inventory
     - if it error (failed to connect to the host via ssh)
     - git permmitions for A_Controlekey.pem (clientkey.pem)
 ```sh
-chmod 400 A_Controlekey.pem 
+chmod 400 Anodeskey.pem
 ansible web01 -m ping -i inventory
 ```
 success----
 
 ===========
-# Inventory
+## Inventory
 
 - login clint node & copy exercise1 folder content to exercise2
     ^ cd vprofile
@@ -244,34 +244,6 @@ ansible all -m ping -i inventory
 ```
 
 ===========
-# YAML & JSON
+## YAML & JSON
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-* passwd authuntication yes
-```sh
-sudo vi(nano) /etc/ssh/sshd_config  ---> Both users
-```
-  PasswordAuthentication `yes`
-   `Esc:wq!`
-
-* restaer the server
-```sh
-sudo systermctl restart sshd  ---> Both users
-```
