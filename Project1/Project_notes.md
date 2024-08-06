@@ -314,9 +314,8 @@ Create EC2 for Kubernetes (Kops)
       
  Create bucket...
 
+## Create IAM
 
-# Create IAM
-------------
    - IAM Dashboard (IAM - Users - Create user)
       - Name: kopsadmin (next)
       - Attach policies directly
@@ -354,6 +353,7 @@ add like this to "Route 53 to Goodaddy"
 * Now login to kops EC2
    - Generate ssh-key " ^ssh-keygen"
    - Install AWSCLI (choco install awscli)
+
 ```bash
 sudo apt update
 
@@ -393,8 +393,9 @@ chmod +x ./kubectl
 sudo mv kubectl /usr/local/bin
 kubectl --hepl (conform kubectl install or not)
 ```
+
 # Install kops (Old versin - v1.26.4)
---------------
+
    - https://github.com/kubernetes/kops/releases?page=3
    - v1.26.4
    - Assets "kops-linux-amd64" - copy the link (dont download manully)
@@ -424,8 +425,10 @@ ram.runtiru.xyz nameserver = ns-2023.awsdns-60.co.uk.
 ram.runtiru.xyz nameserver = ns-441.awsdns-55.com.
 -------
 
-# Create kubernetes cluster
-   - Run Kops command to created kubernetes cluster..
+## Create kubernetes cluster
+
+ Run Kops command to created kubernetes cluster..
+
 ```sh
 # kops create cluster --name=kubevpro.groophy.in \ 
 # > --state=s3://vprofile-kop-states --zone=us-east-2a, us-east-2b \
@@ -446,20 +449,22 @@ kops validate cluster --state=s3://udemy-bucket-n
 
 kubectl get nodes
 ```
+
 * Delete cluster..
+
 ```sh
  kops delete cluster --name=ram.runtiru.xyz --state=s3://udemy-bucket-n --yes
 ```
 
+## Install HELM
 
-# Install HELM.. 
 ([Helm.sh](https://helm.sh/))
    - Get started
    - Install Helm - the installation guide.
    - From the Binary Releases
       - desired version
          - Helm v3.15.1 (Latest) - github
-            - Linux amd64 (https://get.helm.sh/helm-v3.15.1-linux-amd64.tar.gz)
+            - Linux amd64 (`https://get.helm.sh/helm-v3.15.1-linux-amd64.tar.gz`)
    (downlod locally & copy the link)
 
 ```sh
@@ -471,20 +476,3 @@ ls
 sudo mv helm /usr/local/bin/helm
 
 kubectl get nodes
-
-
-==============
-
-
-
-
-
-yg
-
-
-
-
-
-
-
-

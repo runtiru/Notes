@@ -232,5 +232,3 @@ mv terraform.tfstate.backup terraform.tfstate
   2. `Automated Backup`:- Use a tool like `cron` to schedule regular backups of the terraform.tfstate file to a secure location.
   3. `Remote Backends`:- If using a remote backend, check the backend's documentation for information on how to manage state backups and versions.
   4. `Terraform's Built-in Backup`:- Terraform provides a built-in backup mechanism using the terraform state pull command. This command retrieves the current state from the remote state store and saves it to a local file.
-
-  hwois

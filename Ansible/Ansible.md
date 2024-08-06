@@ -62,8 +62,10 @@ ansible --version (ansible & Python)
 [https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html]
     - default ansible inventory file `/etc/ansible/hosts`
 
-* Login Controle instance 
-    - create a folder `vprofile` ---> controle node
+* Login Controle instance
+
+  - create a folder `vprofile` ---> controle node
+
 ```sh
 mkdir vprofile
 cd vprofile
@@ -71,7 +73,9 @@ mkdir exercise1
 cd exercise1
 vim inventory
 ```
+
 * Write invertory file with YAML
+
 ```sh
 all:
   hosts:
@@ -80,6 +84,7 @@ all:
       ansible_user: <ec2-user>
       ansible_ssh_private_key_file: Anodeskey.pem
 ```
+
 save & quit (Ese :wq!)
     - exit Ec2
     - cat Downloads/Anodeskey.pem
@@ -87,11 +92,12 @@ copy the total key (becarefull)
 
 login again the controle node..
 
-    ^ cd vprofile/exercise1
+  ^ cd vprofile/exercise1
     ^ ls (inventory)
     ^ cat inventory
     ^ vim Anodeskey.pem (clientkey.pem)
     - paste the total key data
+
 * give a file permitions
     ^ ls -l (-rw-rw-r--  clintkey and inventory)
     <!-- ^ ansible web01 -m ping -i inventory -->
@@ -119,14 +125,17 @@ login again the controle node..
     - change host key checking true to False
     - save & quite [esc :wq!]
     - exit (logout)
+
 ```sh
 cd /vprofile/exercise1 
 pwd 
 ls
 ansible web01 -m ping -i inventory
 ```
-    - if it error (failed to connect to the host via ssh)
-    - git permmitions for A_Controlekey.pem (clientkey.pem)
+
+  - if it error (failed to connect to the host via ssh)
+  - git permmitions for A_Controlekey.pem (clientkey.pem)
+
 ```sh
 chmod 400 Anodeskey.pem
 ansible web01 -m ping -i inventory
@@ -164,10 +173,12 @@ ansible web01 -m ping -i inventory
 ansible web02 -m ping -i inventory
 ansible db01 -m ping -i inventory
 ```
+
 * if lot of invertory files are there we cont ping one by one lot of time her taken so we have Consept of GROPING.....
 
 * Grouping:
-    ^ vim inventory
+  ^ vim inventory
+
 ```sh
 all:
   hosts:
@@ -206,14 +217,16 @@ ansible all -m ping -i inventory (all servers)
 ansible '*' -m ping -i inventory (all servers)
 ansible 'web*' -m ping -i inventory (only webservers start with web name)
 ```
-* Now exercise2 copy to exercise 
+
+* Now exercise2 copy to exercise
 ^ cp -r exercise2 exercise3
 ^ cd exercise3
 ^ ls (inventory)
 
 * Variables
-    - in exercise3 
+  . in exercise3
     ^ vim inventory
+
 ```sh
 all:
   hosts:
