@@ -50,11 +50,15 @@ sudo apt install ansible -y
 
 ansible --version (ansible & Python)
 ```
+
 ===========
+
 ## Inventory
-    - it provide to basic information about ansible targets like ip address, username, password, keys, portnubers....
+  
+- it provide to basic information about ansible targets like ip address, username, password, keys, portnubers....
 
 - two types to write inventory files
+
 1. INI
 2. Yaml (we use)
 
@@ -64,7 +68,7 @@ ansible --version (ansible & Python)
 
 * Login Controle instance
 
-  - create a folder `vprofile` ---> controle node
+- create a folder `vprofile` ---> controle node
 
 ```sh
 mkdir vprofile
