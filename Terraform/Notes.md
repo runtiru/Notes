@@ -5,11 +5,11 @@
     - Terraform relies on plugins called "Providers" to interact with cloud provider.
 
 * How to create aws provider..?
-  - Create a new file called `main.tf` in your terraform project directory.
+  - Create a new `.tf` file like `main.tf` in your terraform project directory.
 
 ## Provider's Example
 
-## Configure the AWS Provider
+## AWS Provider
 
 ```sh
 terraform {
@@ -60,7 +60,7 @@ provider "google" {
 }
 ```
 
-Creste one folder 'providers' inside the provider 'main.tf'
+Creste one folder anything(terraform) inside the terraform folder one .tf file like `main.tf`
 
 * main.tf
 
@@ -79,23 +79,25 @@ provider "aws" {
 }
 ```
 
-Before initialization trace level log setup in the terraform
+* Before initialization `trace level logs` setup in the terraform, it will Initializing the backend..., and Initializing provider plugins...
+
 ```sh
-export TF_LOG_TRACE (It will print all logs of console)
+export TF_LOG=TRACE (It will print all logs of console)
 terraform init
 ls -a
 ```
 
-When you run `terraform init`, Terraform generates a `.terraform.lock.hcl` and `.terraform` files.
+When you run terraform init..
+   Terraform generates `.terraform` and `.terraform.lock.hcl` files.
 
 ## .terraform.lock.hcl
 
   1. A lock file `.terraform.lock.hcl` to store the information about the dependencies required by your Terraform configuration..
   2. `Dependency Locking` a lock file that containes information about the dependencies requierd by your configuration.
   This includes:
-      Povider versions
-      Module versions
-      Other dependencies
+    - Povider versions
+    - Module versions
+    - Other dependencies
   3. The `.terraform.lock.hcl` file is written in HCL (HashiCorp Configuration Language) format, which is a human-readable configuration language.
 
 ```sh
@@ -215,6 +217,7 @@ terraform {
   1. `Location`:- By default, the backup file is stored in the same directory as the terraform.tfstate file. It is named terraform.tfstate.backup.
   2. `Remote Backends`:- When using remote state backends, the backup management might differ slightly. Some remote backends manage state versions and backups internally, providing mechanisms to revert to previous state versions.
   3. `Restoring from Backup`:- If you need to restore the state from the backup, you can manually replace the corrupted terraform.tfstate file with the terraform.tfstate.backup file by renaming it.
+
 Command line example:
 ```sh
 mv terraform.tfstate.backup terraform.tfstate
@@ -235,6 +238,16 @@ mv terraform.tfstate.backup terraform.tfstate
 
 ## AWS setup for terraform (section 56-355)
 
-Create IAM user for
+* Create IAM user for create an instance
+  - IAM user = `U_TUser1`
 
-hello .AI
+* Create new security groups (default or create new one) in aws manually,
+  - Security group = `U_TSG1` (All traffic = My IP)
+
+## Create machine using terraform (section 57-356)
+
+* Create first instance
+* How to find the AMI ID.. `AWS AMI Locator` search which region you want..?
+[https://cloud-images.ubuntu.com/locator/ec2/]
+
+
