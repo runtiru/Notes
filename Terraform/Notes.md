@@ -236,3 +236,5 @@ mv terraform.tfstate.backup terraform.tfstate
 ## AWS setup for terraform (section 56-355)
 
 Create IAM user for
+
+hello .AI
