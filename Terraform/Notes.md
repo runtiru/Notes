@@ -83,6 +83,9 @@ provider "aws" {
 
 ```sh
 export TF_LOG=TRACE (It will print all logs of console)
+
+[find . -name "*.log" -o -name "*.trace" -o -name "*.tfstate.backup" -delete - this is the command for removing tf_log_trace files]
+
 terraform init
 ls -a
 ```
@@ -244,6 +247,8 @@ mv terraform.tfstate.backup terraform.tfstate
 * Create new security groups (default or create new one) in aws manually,
   - Security group = `U_TSG1` (All traffic = My IP)
 
+--xx--
+
 ## Create machine using terraform (section 57-356)
 
 * Create first instance
@@ -251,3 +256,53 @@ mv terraform.tfstate.backup terraform.tfstate
 [https://cloud-images.ubuntu.com/locator/ec2/]
 
 
+* Create one foleder `Terraform_WS` and `.gitignore` --> spt1
+
+```sh
+Terraform_WS
+├── createinstance.tf
+provider "aws" {
+  access_key = "AKIA3ISBV5LW3U5J3JNJ"
+  secret_key = "SECRET_KEY" (secret key give in runtime)
+  region = "us-east-1"
+}
+
+resource "aws_instance" "firstinstance" {
+  ami  = "ami-0b0ea68c435eb488d"
+  instance_type = "t2.micro"
+}
+
+├── myvar.tf
+variable "myfirstvar" {
+    type = string
+    default = "Hello! Welcome Terraform"
+}
+```
+
+* `.gitignore`
+*.terraform
+*.terraform.lock.hcl
+
+* terraform command's:
+
+```sh
+terraform init (initilize terraform)
+terraform fmt (format terraform code)
+terraform validate (validate terraform code)
+terraform plan (plan terraform code)
+terraform apply (create instance)
+terraform apply -auto-approve (apply terraform code with auto approve)
+terraform destroy (delete instance)
+```
+
+* `terraform state list` (list all resources)
+* `terraform state show` (show resource details)
+* `terraform state rm` (remove resource from state file)
+* `terraform state pull` (pull state from remote)
+* `terraform state push` (push state to remote)
+* `terraform output` (get output values)
+* `terraform output -json` (get output values in json format)
+
+--xx--
+
+## How to create `Centralized files` for Credintials (Creds)
